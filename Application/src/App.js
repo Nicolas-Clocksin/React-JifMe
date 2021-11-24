@@ -1,14 +1,13 @@
 
-import './App.css';
+import Header from './Components/Header.js';
+import Container from './Components/Container';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      
-       
-       
-      </header>
+        <Header title="JifMe"/>
+        <Container />
     </div>
   );
 }
