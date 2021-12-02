@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 
 const header = ({title}) => {
     
@@ -9,12 +8,4 @@ const header = ({title}) => {
         </header>
     )
 }
-
-header.defaultProps = {
-    text: 'Deafult Text'
-}
-header.propTypes = {
-    text: PropTypes.string
-}
-
 export default header;
