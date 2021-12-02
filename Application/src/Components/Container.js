@@ -1,16 +1,20 @@
-import PropTypes from 'prop-types'
 
-const container = ({link}) => {
+// import { GiphyFetch } from '@giphy/js-fetch-api'
+
+// const gif = new GiphyFetch('A5SvR46SrK18epgum4Ms5n4KuqEqOWWB');
+// const gifTest = await gif.random();
+import ButtonBar from './ButtonBar';
+const container = ({link, onClick}) => {
+    
     return(
-        <img src={link} className="image"></img>
+        
+        <div className="imageDiv">
+        
+        <img className="image" src={link} onClick={onClick}></img>
+        <ButtonBar />
+        </div>
     )
 }
 
-container.defaultProps = {
-    link: 'https://media.sproutsocial.com/uploads/meme-example.jpg',
-}
-container.propTypes = {
-    link: PropTypes.string,
-}
 
 export default container;
