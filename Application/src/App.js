@@ -1,6 +1,6 @@
 
 import Header from './Components/Header.js';
-import Holder from './Components/Holder.js';
+import Container from './Components/Container';
 import React, {useState, useEffect} from 'react';
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
         <Header title="JifMe"/>
         {onClick}
 
-             <Holder onClick={onClick} link={url}/>
+              <Container link={url} onClick={onClick}/>
             
          
     </div>

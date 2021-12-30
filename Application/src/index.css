@@ -1,8 +1,43 @@
-img{
-    min-width: 300px;
-    max-width: 600px;
-    min-height: 300px;
-    max-height: 500px;
-    object-fit: cover;
-    justify-content: center;
+
+*{
+  background-color: black;
+}
+.Header{
+  align-items: center;
+}
+.title{
+  color:black;
+  text-align: center;background-color: azure;
+
+}
+.imageDiv{
+  border-radius: 25px;
+}
+.buttonBar{
+  margin: auto;
+  width: 20%;
+  display:list-item;
+ 
+}
+.button{
+  padding: 5%; color: wheat;
+  background-color: red;
+}
+.App{
+  border: 1px solid black;
+  border-radius: 25px;
+  border-style: ridge;
+  height: 50%;
+  width: 40%;
+  padding: 10px;
+  margin: auto;
+  background-color: azure;
+}
+.image{
+  padding: 30px;
+  width: 500px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
