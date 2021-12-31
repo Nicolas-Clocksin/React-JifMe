@@ -1,12 +1,15 @@
 //Used to implement feature of storing liked gif sources and memes
-
+import {Button, ButtonGroup} from "@material-ui/core";
+import {ThumbUp, ThumbDown} from "@material-ui/icons";
 const ButtonBar = ({addGif, liked, disliked}) =>{
     
     return(
         <div className="buttonBar">
-            <button className="button" onClick={liked}>Like</button>
-            <button className="button" onClick={disliked}>Dislike</button>
-            <button className="button" onClick={addGif}>Add Gif</button>
+           <ButtonGroup>
+               <Button color="primary" variant="contained"startIcon={<ThumbUp />} onClick={liked}></Button>
+               <Button color="secondary" variant="contained" startIcon={<ThumbDown />} onClick={disliked}></Button>
+                <Button variant="contained" onClick={addGif}>Add Gif</Button>
+           </ButtonGroup>
         </div>
     )
 }
