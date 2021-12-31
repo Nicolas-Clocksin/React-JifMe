@@ -4,6 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const ImageModel = require('./models/Images');
 const GifModel = require('./models/Gifs');
+const LikesModel = require('./models/Likes');
+const DisLikeModel = require('./models/Dislikes');
 
 const app = express();
 const cors = require('cors');
@@ -40,14 +42,27 @@ app.get("/getGifs", (request, response)=>{
         }
     });
 });
-
 app.post("/postGif", async (request, response) =>{
     const gif = request.body;
     const newGif = new GifModel(gif)
 
     await newGif.save();
     return response.json(gif);
-})
+});
+app.post("/liked", async (request, response) =>{
+    const liked = request.body;
+    const newLiked = new LikesModel(liked);
+
+    await newLiked.save();
+    return response.json(liked);
+});
+app.post("/disliked", async (request, response) =>{
+    const disliked = request.body;
+    const newLiked = new DisLikeModel(disliked);
+
+    await newLiked.save();
+    return response.json(disliked);
+});
 app.listen(3001, ()=>{
     console.log("Running on 3001");
 });

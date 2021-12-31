@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const LikesSchema = new mongoose.Schema({
+const DisLikesSchema = new mongoose.Schema({
     
     src: {
         type: String,
@@ -14,5 +14,5 @@ const LikesSchema = new mongoose.Schema({
 
 });
 
-const LikeModel = mongoose.model("likes", LikesSchema);
-module.exports = LikeModel;
+const DisLikeModel = mongoose.model("dislikes", DisLikesSchema);
+module.exports = DisLikeModel;

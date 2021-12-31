@@ -10,7 +10,7 @@ function App() {
   //declaratoin of variables to be used to store and generate memes/gifs
   const [memeList, setMemeList] = useState([]);
   const [gifList, setGifList] = useState([]);
-  const [url, setURL] = useState("");
+  const [url, setURL] = useState("https://media.sproutsocial.com/uploads/meme-example.jpg");
   const [gifSwitch, setGifSwitch] = useState(false);
   const [gif, setGif] = useState("");
  
@@ -20,9 +20,6 @@ function App() {
       setMemeList(response.data);
       
   })}, []);
-
- 
-  
 
   useEffect(()=>{
     Axios.get('http://localhost:3001/getGifs').then((response)=>{
@@ -38,7 +35,7 @@ function App() {
      
      setGifSwitch(!gifSwitch);
      if(gifSwitch){
-        const randNum = Math.floor(Math.random() * memeL);
+       const randNum = Math.floor(Math.random() * memeL);
         setURL(memeList[randNum].src);
      }
      else{
@@ -48,13 +45,34 @@ function App() {
   }
   const addGif = ()=>{
     fetch('https://api.giphy.com/v1/gifs/random?api_key=A5SvR46SrK18epgum4Ms5n4KuqEqOWWB&tag=&rating=r').then(x=> x.json().then(list => setGif(list.data.images.downsized_large.url)));
-    Axios.post('http://localhost:3001/postGif', {src: gif, liked: false, disliked: false}).then((response)=>{
+    Axios.post('http://localhost:3001/postGif', {src: gif}).then((response)=>{
       console.log(gif);
     }).then((response)=>{
-      setGifList([...gifList, {src: gif, liked: false, disliked: false}]);
+      setGifList([...gifList, {src: gif}]);
     })
   }
- 
+
+  const liked=()=>{
+    let type = "";
+    if(!gifSwitch){
+       type = type.replace("", "gif");
+    }
+    else{
+      type = type.replace("", "image");
+    }
+    Axios.post("http://localhost:3001/liked", {src: url, type: type});
+  }
+  const disliked=()=>{
+    let type = "";
+    if(!gifSwitch){
+       type = type.replace("", "gif");
+    }
+    else{
+      type = type.replace("", "image");
+    }
+    Axios.post("http://localhost:3001/disliked", {src: url, type: type});
+  }
+
   //this is the body of the application in which components are called to be implemented
   //Header accepts the title to be used
   //Container implements the current url and onClick is implemented within
@@ -64,7 +82,7 @@ function App() {
         
 
               <Container link={url} onClick={onClick}/>
-              <ButtonBar addGif={addGif}/>
+              <ButtonBar addGif={addGif} liked={liked} disliked={disliked}/>
              
     </div>
   );

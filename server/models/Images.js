@@ -10,15 +10,7 @@ const ImagesSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    liked: {
-        type: Boolean,
-        required: false,
-    },
-    disliked: {
-        type: Boolean,
-        required: false
-    }
-
+    
 });
 
 const ImageModel = mongoose.model("images", ImagesSchema);
