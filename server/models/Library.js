@@ -16,13 +16,13 @@ const LibrarySchema = new mongoose.Schema({
     },
     like:{
         type: Boolean,
-        required: true
+        required: false
     },
     dislike:{
         type: Boolean,
-        required: true
+        required: false
     }
 });
 
-const LibraryModel = mongoose.model("library", LibrarySchema);
+const LibraryModel = mongoose.model("libraries", LibrarySchema);
 module.exports = LibraryModel;
