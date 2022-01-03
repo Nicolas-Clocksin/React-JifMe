@@ -5,74 +5,32 @@ import Container from './Components/Container.js';
 import ButtonBar from './Components/ButtonBar';
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios'
+import { Button } from '@material-ui/core';
 
 function App() {
   //declaratoin of variables to be used to store and generate memes/gifs
-  const [memeList, setMemeList] = useState([]);
-  const [gifList, setGifList] = useState([]);
-  const [url, setURL] = useState("https://media.sproutsocial.com/uploads/meme-example.jpg");
-  const [gifSwitch, setGifSwitch] = useState(false);
-  const [gif, setGif] = useState("");
- 
-  //useeffect goes to api library and stores the data retrived in an array of MemeList
-  useEffect(() => {
-    Axios.get('http://localhost:3001/getImage').then((response) =>{
-      setMemeList(response.data);
-      
-  })}, []);
 
+ 
+  const [url, setURL] = useState("https://media.sproutsocial.com/uploads/meme-example.jpg");
+  const [displayList, setDisplayList] = useState([]);
+  const [libraryList, setLibrary]= useState([]);
+ 
+
+  //get data of images/gif from the library 
   useEffect(()=>{
-    Axios.get('http://localhost:3001/getGifs').then((response)=>{
-        setGifList(response.data);
+    Axios.get('http://localhost:3001/getLibrary').then((response)=>{
+        setLibrary(response.data);
     })
   }, []);
   
   //onClick: when a user clicks on the image, image is changed from either a gif/image
   //in which a random meme/gif is returned from the generated sources
   const onClick = () => {
-     const gifL = gifList.length;
-     const memeL = memeList.length 
-     
-     setGifSwitch(!gifSwitch);
-     if(gifSwitch){
-       const randNum = Math.floor(Math.random() * memeL);
-        setURL(memeList[randNum].src);
-     }
-     else{
-       const randNum = Math.floor(Math.random() * gifL);
-       setURL(gifList[randNum].src);
-     }
+     const randomNum = Math.floor(Math.random() * libraryList.length);
+     setURL(libraryList[randomNum].src);
+    
   }
-  const addGif = ()=>{
-    fetch('https://api.giphy.com/v1/gifs/random?api_key=A5SvR46SrK18epgum4Ms5n4KuqEqOWWB&tag=&rating=r').then(x=> x.json().then(list => setGif(list.data.images.downsized_large.url)));
-    Axios.post('http://localhost:3001/postGif', {src: gif}).then((response)=>{
-      console.log(gif);
-    }).then((response)=>{
-      setGifList([...gifList, {src: gif}]);
-    })
-  }
-
-  const liked=()=>{
-    let type = "";
-    if(!gifSwitch){
-       type = type.replace("", "gif");
-    }
-    else{
-      type = type.replace("", "image");
-    }
-    Axios.post("http://localhost:3001/liked", {src: url, type: type});
-  }
-  const disliked=()=>{
-    let type = "";
-    if(!gifSwitch){
-       type = type.replace("", "gif");
-    }
-    else{
-      type = type.replace("", "image");
-    }
-    Axios.post("http://localhost:3001/disliked", {src: url, type: type});
-  }
-
+  
   //this is the body of the application in which components are called to be implemented
   //Header accepts the title to be used
   //Container implements the current url and onClick is implemented within
@@ -82,7 +40,7 @@ function App() {
         
 
               <Container link={url} onClick={onClick}/>
-              <ButtonBar addGif={addGif} liked={liked} disliked={disliked}/>
+              <ButtonBar/>
              
     </div>
   );
