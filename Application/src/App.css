@@ -1,0 +1,21 @@
+.App {
+    text-align: center;
+    margin-top: 75px;
+}
+
+.header{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+img{
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 450px;
+    max-height: 550px;
+}
+.Grid{
+    border: 2px;
+    border-style: solid;
+}

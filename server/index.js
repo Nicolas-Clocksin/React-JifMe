@@ -29,8 +29,36 @@ app.post("/postLibrary", async (request, response)=>{
     await newLibrary.save();
 
     return response.json(library);
-})
+});
+app.put("/like", async(request, response) =>{
+    const like = request.body.like;
+    const id = request.body.id;
 
+    try{
+        await LibraryModel.findById(id, (error, result)=>{
+            result.like = like;
+            result.save();
+        });
+    }catch(err){
+        console.log(err);
+    }
+    response.send("Like");
+});
+
+app.put("/dislike", async( request, response)=>{
+    const dislike = request.body.dislike;
+    const id =  request.body.id;
+
+    try{
+        await LibraryModel.findById(id, (error, result)=>{
+            result.dislike = dislike;
+            result.save();
+        });
+    }catch(err){
+        console.log(err);
+    }
+    response.send("Dislike");
+});
 
 app.listen(3001, ()=>{
     console.log("Running on 3001");
