@@ -3,12 +3,6 @@
     margin-top: 75px;
 }
 
-.header{
-    justify-content: center;
-    text-align: center;
-    display: flex;
-}
-
 img{
     min-width: 300px;
     min-height: 300px;
