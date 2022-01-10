@@ -34,11 +34,12 @@ function Home(){
       
       for(let i = 0; i < libraryList.length; i++){
         if(libraryList[i].src === source.src){
-          console.log(libraryList[i].like);
-              Axios.put("http://localhost:3001/like", {like: !libraryList[i].like, id: libraryList[i]._id});
+         
+              Axios.put("http://localhost:3001/like", {like: true, dislike:false, id: libraryList[i]._id});
               libraryList[i].like = !libraryList[i].like;  
            
-              console.log(libraryList[i].like);
+             
+              onClick();
               break;
             
         }
@@ -49,11 +50,12 @@ function Home(){
     const dislike = ()=>{
       for(let i = 0; i < libraryList.length; i++){
         if(libraryList[i].src === source.src){
-          console.log(libraryList[i].dislike);
-          Axios.put("http://localhost:3001/dislike", {dislike: !libraryList[i].dislike, id: libraryList[i]._id});
+         
+          Axios.put("http://localhost:3001/dislike", {dislike: true, like: false, id: libraryList[i]._id});
           libraryList[i].dislike = !libraryList[i].dislike;
           setCurrentSource(libraryList);
-          console.log(libraryList[i].dislike);
+         
+          onClick();
           break;
           
         }

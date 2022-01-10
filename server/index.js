@@ -39,33 +39,57 @@ app.post("/postLibrary", async (request, response)=>{
 //updates the like value currently stored at a specific ID in the database
 app.put("/like", async(request, response) =>{
     const like = request.body.like;
+    const dislike = request.body.dislike;
     const id = request.body.id;
 
     try{
         await LibraryModel.findById(id, (error, result)=>{
-            result.like = like;
+            result.like = Boolean(like);
+            result.dislike = Boolean(dislike);
             result.save();
         });
     }catch(err){
         console.log(err);
     }
-    response.send("Like");
+    
 });
 //updates the current dislike value stored at specific ID in the database
 app.put("/dislike", async( request, response)=>{
     const dislike = request.body.dislike;
-    const id =  request.body.id;
+    const like = request.body.like;
+    const id = request.body.id;
 
     try{
         await LibraryModel.findById(id, (error, result)=>{
-            result.dislike = dislike;
+            result.dislike = Boolean(dislike);
+            result.like = Boolean(like);
             result.save();
         });
     }catch(err){
         console.log(err);
     }
-    response.send("Dislike");
+   
 });
+app.put("/UpdateEntry", async(request, response)=>{
+    const name = request.body.name;
+    const src = request.body.src;
+    const id = request.body.id;
+
+    try{
+        await LibraryModel.findById(id, (error, result)=>{
+            result.name= String(name);
+            result.src = String(src);
+            result.save();
+        });
+    }catch(error){
+        console.log(error);
+    }
+});
+app.delete("/RemoveEntry/:id", async(request, response)=>{
+    const id = request.params.id;
+    await LibraryModel.findByIdAndRemove(id).exec();
+    res.send("Removed from Library");
+})
 //the application is set to run on localhost:3001
 app.listen(3001, ()=>{
     console.log("Running on 3001");

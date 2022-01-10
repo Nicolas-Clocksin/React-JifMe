@@ -17,6 +17,12 @@ function Header () {
                navigate("/AddToLibrary");
            }}>Add To Library</Button>
           </Typography>
+          <Typography>
+           <Button onClick={()=>{
+               navigate("/ViewLibrary");
+           }}>View Library</Button>
+          </Typography>
+          
            
          </Toolbar>
        </AppBar>

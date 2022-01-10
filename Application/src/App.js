@@ -8,6 +8,7 @@
 import './App.css';
 import AddToLibrary from './Pages/AddToLibrary';
 import Home from './Pages/Home';
+import ViewLibrary from './Pages/ViewLibrary';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 function App() {
  
@@ -22,6 +23,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/AddToLibrary" element={<AddToLibrary/>}/>
+            <Route path="/ViewLibrary" element={<ViewLibrary/>}/>
         </Routes>
     
     </Router>

@@ -1,7 +1,7 @@
 //import Axios, UseState, Material UI, Styles, Components
 import Axios from 'axios';
 import {useState, useEffect} from 'react';
-import {Grid, TextField, Button, Typography} from '@material-ui/core';
+import {Grid, TextField, Button, Typography, ButtonGroup} from '@material-ui/core';
 import Header from '../Components/Header';
 import '../styles/AddToLibrary.css';
 
@@ -13,7 +13,7 @@ import '../styles/AddToLibrary.css';
     //Declaration of variables of Upload (for image capture), Memes, Gifs
     const [upload, setUploadSrc] = useState({name: "", src: "", type: "", like: false, dislike: false});
     const [meme, setMeme] = useState({name: "waitingForMeme", src: "http://www.quickmeme.com/img/f3/f3835a3f6ea430e4f797ca998e2dc41d9716314a3e61c40d42bf24ae37f67be7.jpg", type: "image", like: false, dislike: false});
-    const [gif, setGifGenerate] = useState({name: "waitingForGif", src: "https://i.imgflip.com/4jh62r.jpg", type: "gif", like: false, dislike: false}); 
+    const [gif, setGifGenerate] = useState({name: "waitingForGif", src: "https://media1.giphy.com/media/W6dRw3wcllRqS229pl/giphy.gif?cid=ecf05e47l99hrizbk5e9jajgc3hvfjpehkpjxc2b64k9z0rh&rid=giphy.gif&ct=g", type: "gif", like: false, dislike: false}); 
     const [library, setLibrary] = useState([]);
 
     //UseEffect is used to get the current data from the library to compare with later
@@ -80,7 +80,7 @@ import '../styles/AddToLibrary.css';
             Axios.post("http://localhost:3001/postLibrary", {name: gif.name, src: gif.src, type: gif.type, like: gif.like, dislike: gif.dislike}).then((response)=>{
                 
             });
-            setGifGenerate({name: "waitingForGif", src: "https://i.imgflip.com/4jh62r.jpg", type: "gif", like: false, dislike: false});
+            setGifGenerate({name: "waitingForGif", src: "https://media1.giphy.com/media/W6dRw3wcllRqS229pl/giphy.gif?cid=ecf05e47l99hrizbk5e9jajgc3hvfjpehkpjxc2b64k9z0rh&rid=giphy.gif&ct=g", type: "gif", like: false, dislike: false});
         }
     }
     const generateGif = ()=>{
@@ -92,27 +92,30 @@ import '../styles/AddToLibrary.css';
 
         <div>
            <Header/>
-            <Grid className="memeForm" container justifyContent="space-around">
-                <Grid item xs={7} justifyContent="center">
-                <Typography variant="h6">Image Upload</Typography>
-                <img src={meme.src} alt={meme.name}></img>
-                </Grid>
-                <Grid item xs={7}>
+            <Grid className="memeForm" xs={12} container justifyContent="center">
+                <Grid item xs={4} >
+                    <Typography variant="h6">Image Upload</Typography>
+                    <img src={meme.src} alt={meme.name}></img>
+                
+               
                     <TextField id="name" placeholder="Name" onChange={(e)=>{
                         setUploadSrc({...upload, name: e.target.value})
                     }}/>
                     <TextField id="src" placeholder="Source" onChange={(e)=>{
                         setUploadSrc({...upload, src: e.target.value})
                     }}></TextField>
-                    <Button onClick={viewImage}>View Image</Button>
-                <Button onClick={postMeme}>Submit </Button>
+                    <ButtonGroup spacing={4}>
+                        <Button onClick={viewImage}>View Image</Button>
+                        <Button onClick={postMeme}>Submit </Button>
+                    </ButtonGroup>
                 </Grid>
-                </Grid>
-                <Grid className="gifForm" container justifyContent="space-around">
-                    <Grid item>
+               
+                    <Grid item xs={3}>
                         <img src={gif.src} alt={gif.name}></img>
-                        <Grid item><Button onClick={generateGif}>Generate Gif</Button></Grid>
-                        <Grid item><Button onClick={postGif}>Add Gif</Button></Grid>
+                        <ButtonGroup>
+                            <Button onClick={generateGif}>Generate Gif</Button>
+                            <Button onClick={postGif}>Add Gif</Button>
+                       </ButtonGroup>
                     </Grid>
                 </Grid>
         </div>
