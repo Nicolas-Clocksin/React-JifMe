@@ -1,6 +1,7 @@
+//mongoose used to set data variables as data model
 const mongoose= require('mongoose');
 
-
+//Library Schema includes variables name, src, type, like, dislike
 const LibrarySchema = new mongoose.Schema({
     name: {
         type: String,
@@ -23,6 +24,6 @@ const LibrarySchema = new mongoose.Schema({
         required: false
     }
 });
-
+//model is made from the schema and exported
 const LibraryModel = mongoose.model("libraries", LibrarySchema);
 module.exports = LibraryModel;

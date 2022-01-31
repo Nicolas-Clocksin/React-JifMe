@@ -37,12 +37,13 @@ app.post("/postLibrary", async (request, response)=>{
 });
 
 //updates the like value currently stored at a specific ID in the database
-app.put("/like", async(request, response) =>{
+app.put("/UpdateStatus", async(request, response) =>{
     const like = request.body.like;
     const dislike = request.body.dislike;
     const id = request.body.id;
 
     try{
+        //await and store the current update value in the database 
         await LibraryModel.findById(id, (error, result)=>{
             result.like = Boolean(like);
             result.dislike = Boolean(dislike);
@@ -54,41 +55,29 @@ app.put("/like", async(request, response) =>{
     
 });
 //updates the current dislike value stored at specific ID in the database
-app.put("/dislike", async( request, response)=>{
-    const dislike = request.body.dislike;
-    const like = request.body.like;
-    const id = request.body.id;
 
-    try{
-        await LibraryModel.findById(id, (error, result)=>{
-            result.dislike = Boolean(dislike);
-            result.like = Boolean(like);
-            result.save();
-        });
-    }catch(err){
-        console.log(err);
-    }
-   
-});
 app.put("/UpdateEntry", async(request, response)=>{
     const name = request.body.name;
     const src = request.body.src;
     const id = request.body.id;
 
     try{
+        //wait to receive data and once it is update the entry and refresh the current page
         await LibraryModel.findById(id, (error, result)=>{
             result.name= String(name);
             result.src = String(src);
             result.save();
+            response.send("/ViewLibrary");
         });
     }catch(error){
         console.log(error);
     }
 });
+//given an ID, the library entry is found then removed from the database
 app.delete("/RemoveEntry/:id", async(request, response)=>{
     const id = request.params.id;
-    await LibraryModel.findByIdAndRemove(id).exec();
-    res.send("Removed from Library");
+    await LibraryModel.findByIdAndRemove(id).exec().then( ()=> {response.send("/ViewLibrary")});
+    
 })
 //the application is set to run on localhost:3001
 app.listen(3001, ()=>{

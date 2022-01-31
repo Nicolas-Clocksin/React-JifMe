@@ -22,7 +22,16 @@ function Header () {
                navigate("/ViewLibrary");
            }}>View Library</Button>
           </Typography>
-          
+          <Typography>
+           <Button onClick={()=>{
+               navigate("/Likes");
+           }}>Likes</Button>
+          </Typography>
+          <Typography>
+           <Button onClick={()=>{
+               navigate("/Dislikes");
+           }}>Dislikes</Button>
+          </Typography>
            
          </Toolbar>
        </AppBar>

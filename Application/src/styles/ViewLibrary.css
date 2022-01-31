@@ -2,3 +2,16 @@
     margin-top: 100px;
     text-align: center;
 }
+img{
+    height: 50px;
+    width: 50px;
+}
+.form{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.gridImage{
+    height: 50px;
+    width: 50px;
+}

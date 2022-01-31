@@ -1,14 +1,10 @@
-
-// import Header from './Components/Header.js';
-//import Holder from './Components/Holder';
-// import Containers from './Components/Container.js';
-// import ButtonBar from './Components/ButtonBar';
-
-
+//import the libraries and components to be rendered throughout the application
 import './App.css';
 import AddToLibrary from './Pages/AddToLibrary';
 import Home from './Pages/Home';
 import ViewLibrary from './Pages/ViewLibrary';
+import Likes from './Pages/Likes';
+import Dislikes from './Pages/Dislikes';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 function App() {
  
@@ -24,6 +20,8 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="/AddToLibrary" element={<AddToLibrary/>}/>
             <Route path="/ViewLibrary" element={<ViewLibrary/>}/>
+            <Route path="/Likes" element={<Likes/>}/>
+            <Route path="/Dislikes" element={<Dislikes/>}/>
         </Routes>
     
     </Router>

@@ -7,11 +7,10 @@ import Header from '../Components/Header';
 
 function Home(){
     
-
-    const [source, setCurrentSource] = useState({name: "Swordsmen", src: "https://media.sproutsocial.com/uploads/meme-example.jpg", like: false, dislike: false});
-    //const [displayList, setDisplayList] = useState([]);
+    //variables that are used/set throughout the home page
+    const [source, setCurrentSource] = useState({name: "Swordsmen", src: "https://media.sproutsocial.com/uploads/meme-example.jpg", like: false, dislike: false, _id: "12amop123ma"});
     const [libraryList, setLibrary]= useState([]);
-   
+    
   
     //get data of images/gif from the library and set to Library array
     useEffect(()=>{
@@ -19,7 +18,7 @@ function Home(){
           setLibrary(response.data);
       })
     }, []);
-    
+   
     //onClick: a random image/gif is choosen from the library and is then set to the current source to be rendered
     //on the page
     const onClick = () => {
@@ -31,36 +30,17 @@ function Home(){
     //when the like icon is selected, this funciton will update the current selection in the database
     //to switch the boolean value currently stored in the database
     const like = () =>{
-      
-      for(let i = 0; i < libraryList.length; i++){
-        if(libraryList[i].src === source.src){
-         
-              Axios.put("http://localhost:3001/like", {like: true, dislike:false, id: libraryList[i]._id});
-              libraryList[i].like = !libraryList[i].like;  
-           
-             
-              onClick();
-              break;
-            
-        }
+              Axios.put("http://localhost:3001/UpdateStatus", {like: true, dislike:false, id: source._id});
+              onClick();  
+    }
   
-      }
-    }
+    
     //dislike when clicked will update the current boolean value of the value stored in dislike
-    const dislike = ()=>{
-      for(let i = 0; i < libraryList.length; i++){
-        if(libraryList[i].src === source.src){
-         
-          Axios.put("http://localhost:3001/dislike", {dislike: true, like: false, id: libraryList[i]._id});
-          libraryList[i].dislike = !libraryList[i].dislike;
-          setCurrentSource(libraryList);
-         
-          onClick();
-          break;
-          
-        }
-    }
+    const dislike = ()=>{  
+          Axios.put("http://localhost:3001/UpdateStatus", {dislike: true, like: false, id: source._id});         
+          onClick();    
   }
+
     return(
 <Container maxWidth="sm" className="App">
  

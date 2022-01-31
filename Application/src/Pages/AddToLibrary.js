@@ -92,25 +92,27 @@ import '../styles/AddToLibrary.css';
 
         <div>
            <Header/>
-            <Grid className="memeForm" xs={12} container justifyContent="center">
-                <Grid item xs={4} >
+            <Grid direction="column" alignItems="center" className="memeForm"  container justifyContent="center" spacing={4}>
+                <Grid item xs={4} alignItems="center" justifyContent="center">
                     <Typography variant="h6">Image Upload</Typography>
                     <img src={meme.src} alt={meme.name}></img>
                 
-               
+                </Grid>
+                <Grid item xs={2}>
                     <TextField id="name" placeholder="Name" onChange={(e)=>{
                         setUploadSrc({...upload, name: e.target.value})
                     }}/>
                     <TextField id="src" placeholder="Source" onChange={(e)=>{
                         setUploadSrc({...upload, src: e.target.value})
                     }}></TextField>
-                    <ButtonGroup spacing={4}>
+                    <ButtonGroup>
                         <Button onClick={viewImage}>View Image</Button>
                         <Button onClick={postMeme}>Submit </Button>
                     </ButtonGroup>
                 </Grid>
                
-                    <Grid item xs={3}>
+                    <Grid item xs={4}>
+                        <Typography>Add Gif</Typography>
                         <img src={gif.src} alt={gif.name}></img>
                         <ButtonGroup>
                             <Button onClick={generateGif}>Generate Gif</Button>
