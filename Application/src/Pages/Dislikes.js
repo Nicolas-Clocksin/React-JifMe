@@ -2,7 +2,8 @@
 import Header from "../Components/Header";
 import Axios from 'axios';
 import {useState, useEffect} from 'react';
-import {Button, Grid, ButtonGroup, Typography} from "@material-ui/core";
+import {Grid, ButtonGroup, Typography, IconButton, Icon} from "@material-ui/core";
+import {ThumbsUpDown, ThumbUp} from '@material-ui/icons'
 
 
 function Dislikes(){
@@ -41,16 +42,16 @@ function Dislikes(){
                                             <Typography>{enteries.name}</Typography>
                                            <img alt={enteries.name} classname="gridImage" src={enteries.src}></img>
                                            <ButtonGroup>
-                                                <Button onClick={()=>{
+                                                <IconButton color="secondary" onClick={()=>{
                                                     undislike(enteries);
                                                     window.location.reload(false); 
                                                 }}>
-                                                   UnDislike
-                                                </Button>
-                                                <Button onClick={()=>{
+                                                   <Icon><ThumbsUpDown></ThumbsUpDown></Icon>
+                                                </IconButton>
+                                                <IconButton color="primary" onClick={()=>{
                                                     like(enteries);
                                                     window.location.reload(false); 
-                                                }}>Like</Button>   
+                                                }}><Icon><ThumbUp></ThumbUp></Icon></IconButton>   
                                             </ButtonGroup> 
                                            
                                    

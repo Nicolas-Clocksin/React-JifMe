@@ -2,8 +2,8 @@
 import Header from "../Components/Header";
 import Axios from 'axios';
 import {useState, useEffect} from 'react';
-import {Button, Grid, ButtonGroup, Typography} from "@material-ui/core";
-
+import {Grid, ButtonGroup, Typography, IconButton, Icon} from "@material-ui/core";
+import {ThumbDown, ThumbsUpDown} from "@material-ui/icons";
 
 function Likes(){
     //variable for the library
@@ -41,16 +41,16 @@ function Likes(){
                                             <Typography>{enteries.name}</Typography>
                                            <img alt={enteries.name} classname="gridImage" src={enteries.src}></img>
                                            <ButtonGroup>
-                                                <Button onClick={()=>{
+                                                <IconButton color="primary" onClick={()=>{
                                                     unlike(enteries);
                                                     window.location.reload(false); 
                                                 }}>
-                                                    Unlike
-                                                </Button>
-                                                <Button onClick={()=>{
+                                                   <Icon><ThumbsUpDown></ThumbsUpDown></Icon>
+                                                </IconButton>
+                                                <IconButton color="secondary" onClick={()=>{
                                                     dislike(enteries);
                                                     window.location.reload(false); 
-                                                }}>Dislike</Button>   
+                                                }}><Icon><ThumbDown></ThumbDown></Icon></IconButton>   
                                             </ButtonGroup> 
                                            
                                    
