@@ -66,7 +66,7 @@ app.put("/UpdateEntry", async(request, response)=>{
             result.src = String(src);
             result.save();
             response.send("/ViewLibrary");
-        });
+        }).clone();
     }catch(error){
         console.log(error);
     }
