@@ -30,10 +30,8 @@ app.get("/getLibrary", (request, response)=>{
 app.post("/postLibrary", async (request, response)=>{
     const library = request.body;
     const newLibrary = new LibraryModel(library);
-
     await newLibrary.save();
-   
-    return response.json(library);
+    
 });
 
 //updates the like value currently stored at a specific ID in the database
@@ -48,9 +46,9 @@ app.put("/UpdateStatus", async(request, response) =>{
             result.like = Boolean(like);
             result.dislike = Boolean(dislike);
             result.save();
-        });
+        }).clone();
     }catch(err){
-        console.log(err);
+       console.log(err);
     }
     
 });
