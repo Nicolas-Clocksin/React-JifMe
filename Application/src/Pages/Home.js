@@ -8,15 +8,19 @@ import Header from '../Components/Header';
 function Home() {
 
     //variables that are used/set throughout the home page
-    const [source, setCurrentSource] = useState({ name: "Swordsmen", src: "https://media.sproutsocial.com/uploads/meme-example.jpg", like: false, dislike: false });
+    const [source, setCurrentSource] = useState({});
     const [libraryList, setLibrary] = useState([]);
 
 
     //get data of images/gif from the library and set to Library array
     useEffect(() => {
         Axios.get('http://localhost:3001/getLibrary').then((response) => {
+            
             setLibrary(response.data);
-        })
+            const randomNum = Math.floor(Math.random() * response.data.length);
+          
+            setCurrentSource(response.data[randomNum]);
+        });
     }, []);
 
 
