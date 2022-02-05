@@ -1,64 +1,65 @@
 //import libraries and componets for the Likes page
 import Header from "../Components/Header";
 import Axios from 'axios';
-import {useState, useEffect} from 'react';
-import {Grid, ButtonGroup, Typography, IconButton, Icon} from "@material-ui/core";
-import {ThumbDown, ThumbsUpDown} from "@material-ui/icons";
+import { useState, useEffect } from 'react';
+import { Grid, ButtonGroup, Typography, IconButton, Icon } from "@material-ui/core";
+import { ThumbDown, ThumbsUpDown } from "@material-ui/icons";
 
-function Likes(){
+function Likes() {
     //variable for the library
     const [library, setLibrary] = useState([]);
-   
+
     //used to set the current state of the database to be stored in library
-    useEffect(()=>{
-        Axios.get('http://localhost:3001/getLibrary').then((response)=>{
+    useEffect(() => {
+        Axios.get('http://localhost:3001/getLibrary').then((response) => {
             setLibrary(response.data);
         })
-      }, []);
-      
+    }, []);
+
     //unlike is used to restore the entry's values to default
-    const unlike = (entry) =>{
-        Axios.put("http://localhost:3001/UpdateStatus", {like: false, dislike: false, id: entry._id});
-       
+    const unlike = (entry) => {
+        Axios.put("http://localhost:3001/UpdateStatus", { like: false, dislike: false, id: entry._id });
+
     }
     //dislike is used to update the entry in order to 
-    const dislike = (entry) =>{
-        Axios.put("http://localhost:3001/UpdateStatus", {like: false, dislike: true, id: entry._id});
+    const dislike = (entry) => {
+        Axios.put("http://localhost:3001/UpdateStatus", { like: false, dislike: true, id: entry._id });
         console.log(entry);
     }
-    return(
+    return (
         <div>
-            <Header/>
+            <Header />
             <body className="body">
-            {/* Grid is used to map and display each entry of the dislike page */}
+                {/* Grid is used to map and display each entry of the dislike page */}
 
                 <Grid spacing={4} className="grid" container direction="row" justifyContent="center" alignContent="center" alignItems="center">
-                        {library.map((enteries)=>{
-                            if(enteries.like === true){
-                            return(
+                    {library.map((enteries) => {
+                        if (enteries.like === true) {
+                            return (
 
-                                    <Grid item xs={4}>
-                                            <Typography>{enteries.name}</Typography>
-                                           <img alt={enteries.name} classname="gridImage" src={enteries.src}></img>
-                                           <ButtonGroup>
-                                                <IconButton color="primary" onClick={()=>{
-                                                    unlike(enteries);
-                                                    window.location.reload(false); 
-                                                }}>
-                                                   <Icon><ThumbsUpDown></ThumbsUpDown></Icon>
-                                                </IconButton>
-                                                <IconButton color="secondary" onClick={()=>{
-                                                    dislike(enteries);
-                                                    window.location.reload(false); 
-                                                }}><Icon><ThumbDown></ThumbDown></Icon></IconButton>   
-                                            </ButtonGroup> 
-                                           
-                                   
+                                <Grid item xs={4}>
+                                    <Typography>{enteries.name}</Typography>
+                                    <img alt={enteries.name} classname="gridImage" src={enteries.src}></img>
+                                    <ButtonGroup>
+                                        <IconButton color="primary" onClick={() => {
+                                            unlike(enteries);
+                                            window.location.reload(false);
+                                        }}>
+                                            <Icon><ThumbsUpDown></ThumbsUpDown></Icon>
+                                        </IconButton>
+                                        <IconButton color="secondary" onClick={() => {
+                                            dislike(enteries);
+                                            window.location.reload(false);
+                                        }}><Icon><ThumbDown></ThumbDown></Icon></IconButton>
+                                    </ButtonGroup>
+
+
 
                                 </Grid>
-                            
-                            )}
-                        })}
+
+                            )
+                        }
+                    })}
                 </Grid>
             </body>
         </div>

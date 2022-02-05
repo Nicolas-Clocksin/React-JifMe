@@ -1,5 +1,5 @@
 //mongoose used to set data variables as data model
-const mongoose= require('mongoose');
+const mongoose = require('mongoose');
 
 //Library Schema includes variables name, src, type, like, dislike
 const LibrarySchema = new mongoose.Schema({
@@ -15,11 +15,11 @@ const LibrarySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    like:{
+    like: {
         type: Boolean,
         required: false
     },
-    dislike:{
+    dislike: {
         type: Boolean,
         required: false
     }
