@@ -6,6 +6,11 @@ JifMe Application
     a user to post and update the library enteries. The user will also be able to 
     view and update liked or disliked enteries.
 
+    How to Run Application: To run the application
+        1. Create two instances of a terminal/console
+        2. In one terminal open the application folder and the other open
+        the server folder
+        3. Type "npm start" on both the server then the application to start the application
 Home.js
     Purpose: The home page will display to the user an entry of the library in which
     the user can click on to change or like/dislike the image/gif in the library. On click
