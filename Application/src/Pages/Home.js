@@ -24,7 +24,6 @@ function Home() {
     }, []);
 
 
-
     //onClick: a random image/gif is choosen from the library and is then set to the current source to be rendered
     //on the page
     const onClick = () => {
